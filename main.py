@@ -95,6 +95,19 @@ jeep_refined = raw_jeep.copy(deep=False)
 jeep_refined = jeep_refined[variable]
 
 
+
+# Lets convert the int and float string variables to numbers datatypes
+
+
+# convert back_legroom and front_legroom to float datatypes
+counter = 0
+for i in jeep_refined.iterrows():
+    print(i)
+    if counter >= 5:
+        break
+    counter += 1
+
+
 # Lets impute some values that can be found to be true
 
 ######################################################################################
@@ -130,17 +143,27 @@ my_make_names = empty['model_name'].unique()
 print('list of unique values from the model_name column')
 print(my_make_names)
 
+# make a scatterplot of each model_type by year and back_legroom
+
+for i in my_make_names:
+
+    model_name = jeep_refined[jeep_refined['model_name'] == i]
+   
+
+
+
+    sns.scatterplot(x='year', y='back_legroom', data=model_name, hue='engine_displacement').grid()
+    plt.title(i +' numbers')
+    plt.show()
+
 # Data to be inferred
+# Grand Cherokee ---- 1994-1998: 35.7 - 1999-2001: 35.3 - 2002-2003: 35.1 - 2004: 35.3 - 2005-2010: 35.5 - 2011-2021: 38.6
 # Cherokee ---- 1983 is 37in, 1995 is 38.5in, 1991-1994 is 35.3in
 # Liberty ---- 38.8in
 # Compass ---- 39.3
-# Grand Cherokee ---- 38.6
 # Renegade ---- 35.1
 
 ################# use more visualisations to find more constants that can be used to impute
-
-
-
 
 ##############################################################################################
 
@@ -230,7 +253,6 @@ print(jeep_refined.columns)
 
 
 
-# convert back_legroom and front_legroom to float datatypes
 
 
 # change jeep refined into all numbers
