@@ -96,6 +96,9 @@ jeep_refined = jeep_refined[variable]
 
 
 # Lets impute some values that can be found to be true
+
+######################################################################################
+
 # back_legroom (8378 records missing)
 empty = jeep_refined[jeep_refined['back_legroom'].isna()]
 print('empty values in variable back_legroom')
@@ -107,10 +110,9 @@ my_missing = empty.isnull().sum()/len(empty)*100
 print('percentage of missing variables using the back_legroom NaN records ')
 print(my_missing)
 
-# get a list of unique values in the column model_name as this column has 100% completeness
-# 
 
 
+# let begin to either impute values or remove records from the records from the variable back_legroom
 # plot back_legroom to year on a scatter using model_name as hue
 
 sns.scatterplot(x='year', y='back_legroom', data=jeep_refined, hue='model_name', y_jitter= True, x_jitter=True)
@@ -121,38 +123,130 @@ plt.xticks(rotation= 90)
 sns.despine()
 plt.show()
 
-
+# get a list of unique values in the column model_name as this column has 100% completeness
+#
 my_make_names = empty['model_name'].unique()
 
 print('list of unique values from the model_name column')
 print(my_make_names)
 
-#empty_back_legroom = jeep_refined.count(NaN)
-#print('Records with empty back legroom values')
-#print(empty_back_legroom)
+# Data to be inferred
+# Cherokee ---- 1983 is 37in, 1995 is 38.5in, 1991-1994 is 35.3in
+# Liberty ---- 38.8in
+# Compass ---- 39.3
+# Grand Cherokee ---- 38.6
+# Renegade ---- 35.1
 
+################# use more visualisations to find more constants that can be used to impute
+
+
+
+
+##############################################################################################
 
 # body_type
 
+
+
+
+
+###############################################################################################
+
 # city_fuel_economy
+
+
+
+
+
+
+
+
+
+#################################################################################################
 
 # engine_cylinders
 
+
+
+
+
+
+
 # engine_displacement
+
+
+
+################################################################################################
 
 # engine_type
 
+
+
+
+#################################################################################################
+
 # exterior_color
 
+
+
+##################################################################################################
 
 
 
 
 # lets have a look to find variables with a low variance and we will decide if we can remove them safely
 
+jeep_variance = jeep_refined.var()
+print('The variance of each variable in the jeep_refined dataset')
+print(jeep_variance)
+
+# ID variables can be removed without issue to regression analysis. [0, listing_id, sp_id]
+# ]franchise_dealer, is_new, seller_rating, pre_2000] are all boolean values with very small variance. 
+# IDEA these variables could be used in a logistic regression predicting one of these values
+# Will regression work better without them??????
+
+# remove the ID variables
+jeep_refined.drop(['sp_id'], axis=1, inplace=True)
+jeep_refined.drop(['listing_id'], axis=1, inplace=True)
+jeep_refined = jeep_refined.drop(columns=jeep_refined.columns[0])
 
 
 
+print('Columns without ID variables')
+print(jeep_refined.columns)
+
+
+#############
+
+# vehicle power variables: engine_displacement,horsepower
+
+# maintenance variables: mileage, highway_fuel_economy, city_fuel_economy
+
+# time based variables: year, daysonmarket
+
+# location based variables: latitude, longitude, dealer_zip
+
+# price based variables: savings_amount, price
+
+
+
+# convert back_legroom and front_legroom to float datatypes
+
+
+# change jeep refined into all numbers
+
+jeep_numeric = jeep_refined[['engine_displacement','horsepower','mileage', 'highway_fuel_economy', 'city_fuel_economy','year', 'daysonmarket', 'latitude', 'longitude', 'dealer_zip', 'savings_amount', 'price']]
+
+# check pecentages of missing data in jeep_refined
+
+my_missing = jeep_numeric.isnull().sum()/len(jeep_numeric)*100
+print('All numbers missing data percentages')
+print(my_missing)
+
+
+
+
+################################################################################################
 
 # the variable price is our Y variable, lets remove it from our dataset into its own variable y
 y = jeep_refined['price']
@@ -165,4 +259,11 @@ print(jeep_refined.columns)
 print('The dataset without the price variable')
 print(jeep_refined.head())
 
+
+
+# Run test_train_split on the data
+
+
+
+# Now lets run a PCA analysis to see how many variables hold the most predictive power against the price variable
 
