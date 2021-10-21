@@ -27,38 +27,20 @@ raw_jeep.to_csv('jeep.csv')
 
 # Import the sample dataset into memory
 raw_jeep = pd.read_csv('jeep.csv')
-raw_jeep['pre_2000'] = raw_jeep['year'] < 2000
+raw_jeep['pre_2000'] = raw_jeep['year'] < 2000 # add bool column 
 
-
-# to see the values in a visually improved view, I have split the following 2 countplots into pre and post 2000
-# Add a boolean column that states before 2000 is True and after 2000 is False
-pre_2000 = list()
-for i in raw_jeep['year']:
-    
-
-    if i < 2000:
-        pre_2000.append(True)
-    else:
-        pre_2000.append(False)
-
-raw_jeep['pre_2000'] = pre_2000
-
-#pre_2000 = raw_jeep[raw_jeep['year'] < 2000]
-#post_2000 = raw_jeep[raw_jeep['year'] >= 2000]
-
+# a quick look at the data
 pd.set_option('display.max_columns', None)
 print(raw_jeep.head())
 
-
+# to see the values in a visually improved view, I have split the following 2 countplots into pre and post 2000
 
 # plot a distribution of the number of cars sold after 31-12-1999
-
 sns.countplot(data=raw_jeep[raw_jeep['year'] >= 2000], x="year")
 plt.title('Number of cars by year post 2000')
 plt.xlabel('Year of Production')
 plt.ylabel('# of cars')
 plt.xticks(rotation= 90)
-# plt.xlim(1990, 2021)
 plt.savefig('post_2000.pdf')
 plt.show()
 
@@ -68,7 +50,6 @@ plt.title('Number of cars by year pre 2000')
 plt.xlabel('Year of Production')
 plt.ylabel('# of cars')
 plt.xticks(rotation= 90)
-# plt.xlim(1990, 2021)
 plt.savefig('pre_2000.pdf')
 plt.show()
 
@@ -92,7 +73,7 @@ for i in range(0,col_length):
 print('The remaining columns for analysis are:')
 print(variable)
 
-# create new dataframe with the remaining variables
+# create a shallow copy of new dataframe with the remaining variables
 jeep_refined = raw_jeep.copy(deep=False)
 jeep_refined = jeep_refined[variable]
 
@@ -102,7 +83,7 @@ jeep_refined = jeep_refined[variable]
 
 jeep_refined = jeep_refined.dropna()
 
-print(jeep_refined['fuel_tank_volume'].unique())
+#print(jeep_refined['fuel_tank_volume'].unique())
 
 my_missing = jeep_refined.isnull().sum()/len(jeep_refined)*100
 print('Percentage of missing values in variables after dropna()')
@@ -148,9 +129,8 @@ jeep_refined['fuel_tank_volume'] = my_fuel_tank_volume
 
 # convert height, width and length to float
 
-jeep_refined['height'] = pd.to_numeric(jeep_refined['height'], downcast="float", errors='coerce')
-jeep_refined['length'] = pd.to_numeric(jeep_refined['length'], downcast="float", errors='coerce')
-jeep_refined['width'] = pd.to_numeric(jeep_refined['width'], downcast="float", errors='coerce')
+jeep_refined['fuel_tank_volume'] = my_fuel_tank_volume
+jeep_refined['fuel_tank_volume'] = pd.to_numeric(jeep_refined['fuel_tank_volume'], downcast="float", errors='coerce')
 
 
 jeep_refined['maximum_seating'] = pd.to_numeric(jeep_refined['maximum_seating'], errors='coerce')
@@ -228,7 +208,6 @@ print(jeep_variance)
 jeep_refined.drop(['sp_id'], axis=1, inplace=True)
 jeep_refined.drop(['listing_id'], axis=1, inplace=True)
 jeep_refined.drop(['vin'], axis=1, inplace=True)
-jeep_refined.drop(['fuel_tank_volume'], axis=1, inplace=True)
 jeep_refined = jeep_refined.drop(columns=jeep_refined.columns[0])
 
 
@@ -281,9 +260,9 @@ price                   0.0
 ################################################################################################
 
 # the variable price is our Y variable, lets remove it from our dataset into its own variable y
-y = jeep_numeric['price']
-print('dropping the price variable')
-jeep_numeric.drop(['price'], axis=1, inplace=True)
+#y = jeep_numeric['price']
+#print('dropping the price variable')
+#jeep_numeric.drop(['price'], axis=1, inplace=True)
 
 # variable without the price(y) variable
 print('the columns without price variable')
@@ -321,26 +300,26 @@ print(jeep_numeric.dtypes)
 pca=PCA()
 
 jeep_tf = pca.fit_transform(jeep_numeric)
-
 # plot the variance
 plt.plot(pca.explained_variance_ratio_)
 plt.show()
 
-# plot shows we can safely drop the number of x variables to 2
 
-pca = PCA(n_components= 2)
-pca.fit(jeep_numeric)
-my_pca = pca.transform(jeep_numeric)
+
+
+# plot shows we can safely drop the number of x variables to 2
+for i in jeep_refined['model_name'].unique():
+
+    my_model = jeep_numeric[jeep_refined['model_name'] == i]
+    pca = PCA(n_components= 3)
+    pca.fit(my_model)
+    my_pca = pca.transform(my_model)
 
 # visualise pca output
-
-plt.scatter(my_pca[:,0], y)
-
-plt.show()
-
-plt.scatter(my_pca[:,1], y)
-
-plt.show()
+    
+    sns.scatterplot(x=my_model['price'], y=my_pca[:,1], hue=my_model['year'])
+    plt.title('PCA with only ' + i)
+    plt.show()
 
 
 
@@ -351,3 +330,10 @@ plt.show()
 
 
 # Run test_train_split on the data
+
+
+
+
+
+
+
