@@ -23,6 +23,8 @@ List of Activities Still to be Completed:
 
 Save the data into csv files
 
+Save all visualisations to outputs folder
+
 Output the story of the data with streamlit or dash as an interactive dashboard
 
 stop the analysis at the end of the PCA outputs. save the rest of the file to begin the ML algorithms repo proper
