@@ -47,7 +47,7 @@ def drive():
 
     # a quick look at the data
     pd.set_option('display.max_columns', None)
-    print(raw_jeep.head())
+    #print(raw_jeep.head())
 
     # to see the values in a visually improved view, I have split the following 2 countplots into pre and post 2000
 
@@ -58,7 +58,7 @@ def drive():
     plt.ylabel('# of cars')
     plt.xticks(rotation= 90)
     plt.savefig('output/post_2000.pdf')
-    plt.show()
+    #plt.show()
 
     # plot a distribution of the number of cars sold on or before 31-12-1999
     sns.countplot(data=raw_jeep[raw_jeep['year'] < 2000], x="year")
@@ -67,14 +67,14 @@ def drive():
     plt.ylabel('# of cars')
     plt.xticks(rotation= 90)
     plt.savefig('output/pre_2000.pdf')
-    plt.show()
+    #plt.show()
 
 
     # Lets check the missing value percentages
     pd.set_option('display.max_rows', None)
     my_missing_1 = raw_jeep.isnull().sum()/len(raw_jeep)*100
     my_missing_1.to_csv('output/my_missing_percent_1.csv')
-    print(my_missing_1)
+    #print(my_missing_1)
 
     # remove all variables with more than 20% missing values or higher
     variables = raw_jeep.columns
@@ -86,8 +86,8 @@ def drive():
         if my_missing_1[i] <= 20: 
             variable.append(variables[i])
 
-    print('The remaining columns for analysis are:')
-    print(variable)
+    #print('The remaining columns for analysis are:')
+    #print(variable)
 
     # create a shallow copy of new dataframe with the remaining variables
     jeep_refined = raw_jeep.copy(deep=False)
@@ -265,10 +265,10 @@ def drive():
     #jeep_numeric.drop(['price'], axis=1, inplace=True)
 
     # variable without the price(y) variable
-    print('the columns without price variable')
-    print(jeep_numeric.columns)
-    print('The dataset without the price variable')
-    print(jeep_numeric.head())
+    #print('the columns without price variable')
+    #print(jeep_numeric.columns)
+    #print('The dataset without the price variable')
+    #print(jeep_numeric.head())
 
     # Save jeep_numeric to csv file
     jeep_numeric.to_csv('output/jeep_numeric.csv')
@@ -282,9 +282,10 @@ def drive():
 
     sns.heatmap(jeep_numeric.corr(), annot=True)
     plt.savefig('output/correlation.pdf')
-    plt.show()
+    #plt.show()
     # Lets check the datatypes of the variables
 
+    print('datatypes of the remaining variables')
     print(jeep_numeric.dtypes)
 
 
@@ -306,7 +307,7 @@ def drive():
     # plot the variance
     plt.plot(pca.explained_variance_ratio_)
     plt.savefig('output/PCA_var_ratio.jpg')
-    plt.show()
+    #plt.show()
 
 
 
@@ -324,7 +325,7 @@ def drive():
         sns.scatterplot(x=my_model['price'], y=my_pca[:,0], hue=my_model['year'])
         plt.title('PCA with only ' + i)
         plt.savefig('output/' + i + 'PCA_year.jpg')
-        plt.show()
+        #plt.show()
 
 
     return 'End of drive'
