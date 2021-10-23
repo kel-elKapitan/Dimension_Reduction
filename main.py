@@ -16,22 +16,29 @@ def main():
 
     # if dataset sample hasnt been saved, save file
 
-    my_file = Path("/path/to/file")
+    my_file = Path("input/jeep.csv")
     if my_file.is_file():
         # file exists
         drive()
 
-
-    # import a sample of he dataset, all vehicles with the value 'Jeep' in the make_name column of the population
+    # create a variable with all the unique values in the make_name
     iter_csv = pd.read_csv('used_cars_data.csv', iterator=True, chunksize=500)
-    raw_jeep = pd.concat([chunk[chunk['make_name'] == 'Jeep'] for chunk in iter_csv])
+    make_names = iter_csv.columns
+    def get_data():
 
-    print(raw_jeep.head())
-    # print(len(raw_jeep()))
+        for i in make_names:
+            # import samples of the dataset, all vehicles split with the make_name column
+ 
+            raw_jeep = pd.concat([chunk[chunk['make_name'] == i] for chunk in iter_csv])
 
-    # save the sample dataset into a csv for easy reference and as a checkpoint in the process
+            print(raw_jeep.head())
+        # print(len(raw_jeep()))
 
-    raw_jeep.to_csv('jeep.csv')
+        # save the sample dataset into a csv for easy reference and as a checkpoint in the process
+
+        raw_jeep.to_csv(i + '.csv')
+
+        return 'Data Imported and split into samples'
 
     drive()
 
