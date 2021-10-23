@@ -2,7 +2,7 @@
 #### Dimension reduction techniques used on a dataset with 50+ variables ending in a PCA analysis on
 
 Dataset taken from: https://www.kaggle.com/ananaymital/us-used-cars-dataset
-
+___
 __List of activities:__
 
 1. Reducing Dimensions due to Missing values
