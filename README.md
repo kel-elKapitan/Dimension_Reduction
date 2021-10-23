@@ -22,6 +22,7 @@ __List of Activities Still to be Completed:__
 
 
 
+![Countplot of jeep cars by year](output/pre_2000.jpg)
 
 
 
