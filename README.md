@@ -14,6 +14,7 @@ __List of activities:__
 
 __List of Activities Still to be Completed:__
 
+1. Label all visualisations properly, titles, xlabel, ylabel, legends
 1. Combine PCA results to the end of the column of the data, save as csv, combine into one csv file when complete 
 1. Output the story of the data with streamlit or dash as an interactive dashboard
 1. Learn and apply markdown on this document and complete documentation and user guide
