@@ -15,32 +15,81 @@ def main():
     # choose one type of vehicle as a sample becausae the dataset is over 9GB
 
     # if dataset sample hasnt been saved, save file
-
+    '''
     my_file = Path("input/jeep.csv")
     if my_file.is_file():
         # file exists
+        print('File Exists')
         drive()
-
+    '''
     # create a variable with all the unique values in the make_name
-    iter_csv = pd.read_csv('used_cars_data.csv', iterator=True, chunksize=500)
-    make_names = iter_csv.columns
-    def get_data():
+    
+    def get_data(i):
 
-        for i in make_names:
-            # import samples of the dataset, all vehicles split with the make_name column
- 
-            raw_jeep = pd.concat([chunk[chunk['make_name'] == i] for chunk in iter_csv])
 
-            print(raw_jeep.head())
+        raw_test = []
+        print('Creating csv for ' + i)
+        # import samples of the dataset, all vehicles split with the make_name column
+        iter_csv = pd.read_csv('used_cars_data.csv', iterator=True, chunksize=500)
+        raw = pd.concat([chunk[chunk['make_name'] == i] for chunk in iter_csv])
+        
+        raw.to_csv('input/' + i + '.csv')
+        print(i + ' descriptive stats')
+        print(raw.describe())
+        raw.describe().to_csv('output/' + i + '_Desc.csv')
+        
+          
+
         # print(len(raw_jeep()))
 
         # save the sample dataset into a csv for easy reference and as a checkpoint in the process
 
-        raw_jeep.to_csv(i + '.csv')
+        print(i + '.csv saved')
 
-        return 'Data Imported and split into samples'
+        return
+
+    # Create Datasets from the make_name column
+    get_data('Jeep')
+    get_data('Subaru')
+    get_data('Mazda')
+    get_data('Alfa Romeo')
+    get_data('Land Rover')
+    get_data('BMW')
+    get_data('Hyundai')
+    #get_data('Chevrolet')
+    get_data('Lexus')
+    get_data('Cadilac')
+    get_data('Chrysler')
+    get_data('Dodge')
+    get_data('Mercedes Benz')
+    get_data('Nissan')
+    get_data('Honda')
+    get_data('Kia')
+    get_data('Lincoln')
+    get_data('Audi')
+    get_data('Jaguar')
+    get_data('RAM')
+    get_data('Volkswagon')
+    get_data('Porsche')
+    get_data('INFINITI')
+    get_data('GMC')
+    get_data('Acura')
+    get_data('Toyota')
+    get_data('Maserati')
+    get_data('Volvo')
+    
+
+
+
+
+
+
+
+
+
 
     drive()
+
 
     return 'The end of main!!!!!!!'
 
@@ -49,7 +98,7 @@ def drive():
     # Driver code for the application
 
     # Import the sample dataset into memory
-    raw_jeep = pd.read_csv('jeep.csv')
+    raw_jeep = pd.read_csv('input/Jeep.csv')
     raw_jeep['pre_2000'] = raw_jeep['year'] < 2000 # add bool column 
 
     # a quick look at the data
@@ -64,7 +113,7 @@ def drive():
     plt.xlabel('Year of Production')
     plt.ylabel('# of cars')
     plt.xticks(rotation= 90)
-    plt.savefig('output/post_2000.pdf')
+    plt.savefig('output/post_2000.jpg')
     #plt.show()
 
     # plot a distribution of the number of cars sold on or before 31-12-1999
@@ -73,7 +122,7 @@ def drive():
     plt.xlabel('Year of Production')
     plt.ylabel('# of cars')
     plt.xticks(rotation= 90)
-    plt.savefig('output/pre_2000.pdf')
+    plt.savefig('output/pre_2000.jpg')
     #plt.show()
 
 
@@ -318,9 +367,13 @@ def drive():
 
 
 
-
+    counter = 0
+    my_max = len(jeep_refined['model_name'].unique()) - 1
     # plot shows we can safely drop the number of x variables to 2
     for i in jeep_refined['model_name'].unique():
+        counter += 1
+        if counter == my_max:
+            break
 
         my_model = jeep_numeric[jeep_refined['model_name'] == i]
         pca = PCA(n_components= 3)

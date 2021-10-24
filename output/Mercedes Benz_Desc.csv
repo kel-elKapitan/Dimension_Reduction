@@ -1,0 +1,9 @@
+,city_fuel_economy,combine_fuel_economy,daysonmarket,engine_displacement,highway_fuel_economy,horsepower,is_certified,latitude,listing_id,longitude,mileage,owner_count,price,savings_amount,seller_rating,sp_id,vehicle_damage_category,year
+count,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+mean,,,,,,,,,,,,,,,,,,
+std,,,,,,,,,,,,,,,,,,
+min,,,,,,,,,,,,,,,,,,
+25%,,,,,,,,,,,,,,,,,,
+50%,,,,,,,,,,,,,,,,,,
+75%,,,,,,,,,,,,,,,,,,
+max,,,,,,,,,,,,,,,,,,

@@ -3,5 +3,10 @@
 ################################################################################
 
 /used_cars_data.csv
+
+/input/
+/output/jeep_numeric.csv
+/output/jeep_refined.csv
+/output/y.csv
+/inputJeep.csv
 /jeep.csv
-/output
