@@ -22,11 +22,16 @@ __List of Activities Still to be Completed:__
 1. refactor and modularise code for performance
 
 
-### Countplot of cars pre 2000 sold in 20xx from xxxxx company
-![Countplot of jeep cars by year](output/pre_2000.jpg)
 
-### Countplot of cars pre 2000 sold in 20xx from xxxxx company
-![Countplot of jeep cars by year](output/post_2000.jpg)
+### Countplot of Jeeps pre-2000 sold in September 2020 from Cargurus
+![Countplot of jeep cars by year pre 2000](output/pre_2000.jpg)
 
+### Countplot of Jeeps post-2000 sold in September 2020 from Cargurus
+![Countplot of jeep cars by year post 2000](output/post_2000.jpg)
+
+
+
+### PCA analysis on vehicles made by Jeep
+![Countplot of jeep cars by year](output/jeepPCA_year.jpg)
 
 
