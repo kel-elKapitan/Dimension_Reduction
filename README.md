@@ -3,7 +3,7 @@
 
 Dataset taken from: https://www.kaggle.com/ananaymital/us-used-cars-dataset
 ___
-__List of activities:__
+__List of activities completed:__
 
 1. Reducing Dimensions due to Missing values
 1. Reducing Dimensions due to Low variance
@@ -14,6 +14,7 @@ __List of activities:__
 
 __List of Activities Still to be Completed:__
 
+1. Volkswagon and Mercedes Benz csv files are empty, check the value name is correct
 1. Label all visualisations properly, titles, xlabel, ylabel, legends
 1. Combine PCA results to the end of the column of the data, save as csv, combine into one csv file when complete 
 1. Output the story of the data with streamlit or dash as an interactive dashboard
