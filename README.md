@@ -14,6 +14,7 @@ __List of activities completed:__
 
 __List of Activities Still to be Completed:__
 
+1. Create user guide for management and for analyst/developers
 1. Volkswagon and Mercedes Benz csv files are empty, check the value name is correct
 1. Label all visualisations properly, titles, xlabel, ylabel, legends
 1. Combine PCA results to the end of the column of the data, save as csv, combine into one csv file when complete 
