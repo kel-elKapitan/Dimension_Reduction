@@ -1,15 +1,4 @@
 # Dimension_Reduction
-# Background
-
-Presented is an analysis of PUT LINKused Car salesEND LINK  provided by https://www.kaggle.com/ananaymital/us-used-cars-dataset.
-
-This analysis covers <b>retieving data from a csv file, computation and data manipulation</b> as well as <b>answering business questions.</b>
-
-This analysis is based purely in Python
-
-It uses <i>Pandas and Numpy</i> for data manipulation and computation, <i>matplotlib and seaborn</i> for visualisations.
-
-## Contents
 
 
 # UNFINISHED, TO BE COMPLETED 
