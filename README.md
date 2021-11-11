@@ -12,16 +12,11 @@ It uses <i>Pandas and Numpy</i> for data manipulation and computation, <i>matplo
 ## Contents
 
 
-
+# UNFINISHED, TO BE COMPLETED 
 
 #### Dimension reduction techniques used on a dataset with 50+ variables ending in a PCA analysis on
-
-Dataset taken from: 
-___
-__List of activities completed:__
-
+ 
 1. Reducing Dimensions due to Missing values
-1. Reducing Dimensions due to Low variance
 1. Reducing Dimensions due to Highly Correlated variables
 1. PCA Analysis
 1. Save the data into csv files to the output folder
